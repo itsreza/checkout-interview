@@ -1,12 +1,12 @@
 export type OrderDetailTypes = {
-  nationalId: string;
-  phoneNumber: string;
-  addressId: string;
+  nationalId?: string;
+  phoneNumber?: string;
+  addressId?: string;
 };
 
-export const validateNationalId = (nationalId: string) => {
+export const validateNationalId = (nationalId?: string) => {
   const nationalIdRegex = /^\d{10}$/;
-  if (!nationalId.trim()) {
+  if (!nationalId?.trim()) {
     return "وارد کردن کد ملی الزامیست.";
   }
   if (!nationalIdRegex.test(nationalId)) {
@@ -15,8 +15,8 @@ export const validateNationalId = (nationalId: string) => {
   return "";
 };
 
-export const validatePhoneNumber = (phoneNumber: string) => {
-  const phone = phoneNumber.trim();
+export const validatePhoneNumber = (phoneNumber?: string) => {
+  const phone = phoneNumber?.trim();
   if (!phone) {
     return "وارد کردن تلفن همراه الزامیست.";
   }
@@ -31,8 +31,8 @@ export const validatePhoneNumber = (phoneNumber: string) => {
   return "";
 };
 
-export const validateAddressId = (addressId: string) => {
-  if (!addressId.trim()) {
+export const validateAddressId = (addressId?: string) => {
+  if (!addressId?.trim()) {
     return "انتخاب آدرس الزامیست.";
   }
   return "";

@@ -55,7 +55,7 @@ const useOrderCompletion = () => {
     return isValid;
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e?.target;
     setOrderDetail((prevState) => ({ ...prevState, [name]: value }));
   };
@@ -64,9 +64,9 @@ const useOrderCompletion = () => {
     setOrderDetail((prevState) => ({ ...prevState, addressId }));
 
   const onSubmit = () => {
-    // if (validate(orderDetail)) {
-    submitOrder(orderDetail);
-    // }
+    if (validate(orderDetail)) {
+      submitOrder(orderDetail);
+    }
   };
 
   const onCloseRetry = () => {

@@ -9,5 +9,4 @@ export type OrderCompletionFormPropertiesTypes = {
   onChange: (event: React.FocusEvent<HTMLInputElement>) => void;
   selectedAddress?: { details?: string };
   onSelectAddress: () => void;
-  onSubmit: () => void;
 };

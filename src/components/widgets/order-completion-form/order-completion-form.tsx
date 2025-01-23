@@ -6,8 +6,7 @@ import { TextField } from "@/components/UI";
 const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
   properties
 ) => {
-  const { errors, onChange, selectedAddress, onSelectAddress, onSubmit } =
-    properties;
+  const { errors, onChange, selectedAddress, onSelectAddress } = properties;
   return (
     <div className="px-[18px] flex flex-col pt-6 gap-6">
       <div className="flex flex-col gap-3">
@@ -55,11 +54,6 @@ const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
           <span>انتخاب از آدرس‌های من</span>
         </Button>
       </div>
-      {/* <div className="flex justify-end">
-        <Button onClick={onSubmit} color="secondary">
-          <span>تایید و ادامه</span>
-        </Button>
-      </div> */}
     </div>
   );
 };

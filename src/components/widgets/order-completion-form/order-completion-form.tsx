@@ -1,11 +1,9 @@
 import { Button } from "@/components/UI";
-import React, { FC, Fragment } from "react";
+import React, { FC, Fragment, memo } from "react";
 import { OrderCompletionFormPropertiesTypes } from "./types";
 import { TextField } from "@/components/UI";
 
-const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
-  properties
-) => {
+const Component: FC<OrderCompletionFormPropertiesTypes> = (properties) => {
   const { errors, onChange, selectedAddress, onSelectAddress } = properties;
 
   return (
@@ -60,4 +58,4 @@ const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
   );
 };
 
-export { OrderCompletionForm };
+export const OrderCompletionForm = memo(Component);

@@ -1,11 +1,9 @@
 import { Button, BottomSheet } from "@/components/UI";
 import { useSearchParams } from "next/navigation";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { AddressTypes, DeleteConfirmationPropertiesTypes } from "./types";
 
-const DeleteConfirmation: FC<DeleteConfirmationPropertiesTypes> = (
-  properties
-) => {
+const Component: FC<DeleteConfirmationPropertiesTypes> = (properties) => {
   const { isOpen, onClose, onConfirm, addresses } = properties;
   const searchParams = useSearchParams();
   const id = searchParams.get("id") as string;
@@ -45,4 +43,4 @@ const DeleteConfirmation: FC<DeleteConfirmationPropertiesTypes> = (
     </BottomSheet>
   );
 };
-export { DeleteConfirmation };
+export const DeleteConfirmation = memo(Component);

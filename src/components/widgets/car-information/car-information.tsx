@@ -1,8 +1,8 @@
 import { Rows } from "@/components/UI";
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
-const CarInformation: FC = () => {
+const Component: FC = () => {
   return (
     <div className="max-w-[280px] mx-auto flex flex-col gap-6 pt-6 pb-8">
       <Image
@@ -22,4 +22,4 @@ const CarInformation: FC = () => {
   );
 };
 
-export { CarInformation };
+export const CarInformation = memo(Component);

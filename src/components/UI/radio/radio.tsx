@@ -1,8 +1,8 @@
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { RadioPropertiesTypes } from "./types";
 
-export const Radio: FC<RadioPropertiesTypes> = (properties) => {
+export const Component: FC<RadioPropertiesTypes> = (properties) => {
   const { id, name, value, checked, onChange, title, description, onRemove } =
     properties;
   return (
@@ -34,3 +34,5 @@ export const Radio: FC<RadioPropertiesTypes> = (properties) => {
     </div>
   );
 };
+
+export const Radio = memo(Component);

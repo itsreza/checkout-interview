@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { TextFieldPropertiesTypes } from "./types";
 
-const TextField: FC<TextFieldPropertiesTypes> = (properties) => {
+const Component: FC<TextFieldPropertiesTypes> = (properties) => {
   const {
     type = "text",
     placeholder,
@@ -33,4 +33,4 @@ const TextField: FC<TextFieldPropertiesTypes> = (properties) => {
   );
 };
 
-export { TextField };
+export const TextField = memo(Component);

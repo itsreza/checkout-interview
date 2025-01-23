@@ -1,8 +1,8 @@
 import Image from "next/image";
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { BottomSheetPropertiesTypes } from "./types";
 
-const BottomSheet: FC<BottomSheetPropertiesTypes> = (properties) => {
+const Component: FC<BottomSheetPropertiesTypes> = (properties) => {
   const { isOpen, onClose, children, title, actions } = properties;
   return (
     <div
@@ -42,4 +42,4 @@ const BottomSheet: FC<BottomSheetPropertiesTypes> = (properties) => {
   );
 };
 
-export { BottomSheet };
+export const BottomSheet = memo(Component);

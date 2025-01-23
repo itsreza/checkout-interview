@@ -1,11 +1,9 @@
 import { BottomSheet, Button } from "@/components/UI";
 import { RadioGroup } from "@/components/UI/radio/radio-group";
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, memo, useEffect, useState } from "react";
 import { AddressBottomSheetPropertiesTypes, AddressTypes } from "./types";
 
-const AddressBottomSheet: FC<AddressBottomSheetPropertiesTypes> = (
-  properties
-) => {
+const Component: FC<AddressBottomSheetPropertiesTypes> = (properties) => {
   const { onClose, isOpen, addresses, selectedAddress, onConfirm, onRemove } =
     properties;
   const [selected, setSelected] = useState<string | undefined>(selectedAddress);
@@ -51,4 +49,4 @@ const AddressBottomSheet: FC<AddressBottomSheetPropertiesTypes> = (
   );
 };
 
-export { AddressBottomSheet };
+export const AddressBottomSheet = memo(Component);

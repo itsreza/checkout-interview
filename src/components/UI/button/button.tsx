@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import styles from "./button.module.scss";
 import Image from "next/image";
 import { ButtonPropertiesTypes } from "./types";
 
-const Button: FC<ButtonPropertiesTypes> = (properties) => {
+const Component: FC<ButtonPropertiesTypes> = (properties) => {
   const {
     color = "primary",
     variant = "contained",
@@ -38,4 +38,4 @@ const Button: FC<ButtonPropertiesTypes> = (properties) => {
   );
 };
 
-export { Button };
+export const Button = memo(Component);

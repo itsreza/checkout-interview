@@ -9,12 +9,12 @@ const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
   const { errors, onChange, selectedAddress, onSelectAddress, onSubmit } =
     properties;
   return (
-    <div className="px-[18px] flex flex-col py-12 gap-12">
+    <div className="px-[18px] flex flex-col pt-6 gap-6">
       <div className="flex flex-col gap-3">
         <span className="text-black text-headline-6 font-medium">
           لطفا اطلاعات شخصی مالک خودرو را وارد کنید:
         </span>
-        <div className="flex gap-[28px] flex-col">
+        <div className="flex gap-2 flex-col">
           <TextField
             error={Boolean(!!errors?.nationalId)}
             helperText={errors?.nationalId}
@@ -43,7 +43,7 @@ const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
           </span>
         ) : (
           <p
-            className={`text-black text-headline-6 font-normal ${
+            className={`text-black text-subtitle-2 font-normal ${
               errors?.addressId ? "text-error" : ""
             }`}
           >
@@ -55,11 +55,11 @@ const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
           <span>انتخاب از آدرس‌های من</span>
         </Button>
       </div>
-      <div className="flex justify-end">
+      {/* <div className="flex justify-end">
         <Button onClick={onSubmit} color="secondary">
           <span>تایید و ادامه</span>
         </Button>
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -8,10 +8,10 @@ const TextField: FC<TextFieldPropertiesTypes> = (properties) => {
     onBlur,
     name,
     error,
-    helperText,
+    helperText = " ",
   } = properties;
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-1">
       <input
         className={`border w-full outline-none p-3 border-grey-400 text-grey-700 ${
           error ? "border-error text-error placeholder:text-error" : ""
@@ -22,11 +22,13 @@ const TextField: FC<TextFieldPropertiesTypes> = (properties) => {
         onBlur={onBlur}
         name={name}
       />
-      {helperText && (
-        <span className="text-error font-normal text-subtitle-2">
-          {helperText}
-        </span>
-      )}
+      <span
+        className={`text-error font-normal text-subtitle-2 transition-opacity ${
+          helperText ? "visible opacity-100" : "invisible opacity-0 h-[22px]"
+        }`}
+      >
+        {helperText}
+      </span>
     </div>
   );
 };

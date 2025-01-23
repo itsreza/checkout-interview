@@ -9,7 +9,7 @@ import {
   OrderCompletionForm,
   RetryBottomSheet,
 } from "@/components/widgets";
-import { Divider } from "@/components/UI";
+import { Button, Divider } from "@/components/UI";
 
 export default function Home() {
   const {
@@ -57,17 +57,24 @@ export default function Home() {
     [router]
   );
   return (
-    <div>
-      <Divider title="مشخصات بیمه نامه" />
-      <CarInformation />
-      <Divider title="مشخصات مالک خودرو" />
-      <OrderCompletionForm
-        errors={errors}
-        onChange={handleChange}
-        selectedAddress={selectedAddress}
-        onSelectAddress={handleOpen}
-        onSubmit={onSubmit}
-      />
+    <div className="flex flex-col min-h-dvh">
+      <div className="flex-grow">
+        <Divider title="مشخصات بیمه نامه" />
+        <CarInformation />
+        <Divider title="مشخصات مالک خودرو" />
+        <OrderCompletionForm
+          errors={errors}
+          onChange={handleChange}
+          selectedAddress={selectedAddress}
+          onSelectAddress={handleOpen}
+          onSubmit={onSubmit}
+        />
+      </div>
+      <div className="flex justify-end px-[18px] py-3">
+        <Button onClick={onSubmit} color="secondary">
+          <span>تایید و ادامه</span>
+        </Button>
+      </div>
       <DeleteConfirmation
         isOpen={confrimation}
         onClose={handleClose}

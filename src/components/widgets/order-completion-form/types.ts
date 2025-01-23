@@ -6,8 +6,8 @@ type ErrorObjectTypes = {
 
 export type OrderCompletionFormPropertiesTypes = {
   errors: ErrorObjectTypes;
-  onChange: () => void;
-  selectedAddress: { details?: string };
+  onChange: (event: React.FocusEvent<HTMLInputElement>) => void;
+  selectedAddress?: { details?: string };
   onSelectAddress: () => void;
   onSubmit: () => void;
 };

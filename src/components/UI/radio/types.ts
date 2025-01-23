@@ -19,7 +19,7 @@ export type RadioPropertiesTypes = {
 export type RadioGroupPropertiesTypes = {
   name: string;
   options: Array<RadioOptionPropertiesTypes>;
-  selectedValue: string;
+  selectedValue?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onRemove?: (id: string) => void;
 };

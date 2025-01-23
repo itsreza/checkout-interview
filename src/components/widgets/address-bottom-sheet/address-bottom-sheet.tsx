@@ -1,23 +1,26 @@
 import { BottomSheet, Button } from "@/components/UI";
 import { RadioGroup } from "@/components/UI/radio/radio-group";
-import React, { FC, useState } from "react";
-import { AddressBottomSheetPropertiesTypes } from "./types";
+import React, { FC, useEffect, useState } from "react";
+import { AddressBottomSheetPropertiesTypes, AddressTypes } from "./types";
 
 const AddressBottomSheet: FC<AddressBottomSheetPropertiesTypes> = (
   properties
 ) => {
   const { onClose, isOpen, addresses, selectedAddress, onConfirm, onRemove } =
     properties;
-  const [selected, setSelected] = useState(selectedAddress);
+  const [selected, setSelected] = useState<string | undefined>(selectedAddress);
 
-  useState(() => {
-    setSelected(selectedAddress);
-  }, [selectedAddress]);
+  useEffect(() => {
+    if (selectedAddress) {
+      setSelected(selectedAddress);
+    }
+  }, [isOpen]);
 
-  const handleChange = (event) => setSelected(event?.target?.value);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+    setSelected(event?.target?.value);
 
   const handleConfirm = () => {
-    onConfirm(selected);
+    onConfirm(selected || "");
     onClose();
   };
 
@@ -34,7 +37,7 @@ const AddressBottomSheet: FC<AddressBottomSheetPropertiesTypes> = (
     >
       <RadioGroup
         name="addressId"
-        options={addresses?.map((address) => ({
+        options={addresses?.map((address: AddressTypes) => ({
           id: address?.id,
           value: address?.id,
           title: address?.name,

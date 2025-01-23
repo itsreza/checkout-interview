@@ -41,24 +41,3 @@ export default function RootLayout({
     </html>
   );
 }
-
-// // app/layout.tsx
-// import './globals.css'; // Import global styles
-// import './_fonts.css'; // Import font styles
-
-// export const metadata = {
-//   title: 'My App',
-//   description: 'A Next.js 15 App',
-// };
-
-// export default function RootLayout({
-//   children,
-// }: {
-//   children: React.ReactNode;
-// }) {
-//   return (
-//     <html lang="en">
-//       <body>{children}</body>
-//     </html>
-//   );
-// }

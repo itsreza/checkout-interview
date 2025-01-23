@@ -1,7 +1,7 @@
 export type TextFieldPropertiesTypes = {
   type?: "text" | "tel";
   placeholder: string;
-  onBlur?: React.FocusEventHandler<HTMLInputElement>;
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void;
   name?: string;
   error?: boolean;
   helperText?: string;

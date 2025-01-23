@@ -1,15 +1,22 @@
 import { Button, BottomSheet } from "@/components/UI";
 import { useSearchParams } from "next/navigation";
 import React, { FC } from "react";
-import { DeleteConfirmationPropertiesTypes } from "./types";
+import { AddressTypes, DeleteConfirmationPropertiesTypes } from "./types";
 
 const DeleteConfirmation: FC<DeleteConfirmationPropertiesTypes> = (
   properties
 ) => {
   const { isOpen, onClose, onConfirm, addresses } = properties;
   const searchParams = useSearchParams();
-  const id = searchParams.get("id");
-  const selectedAddress = addresses.find((address) => address.id === id);
+  const id = searchParams.get("id") as string;
+  const selectedAddress = addresses.find(
+    (address: AddressTypes) => address.id === id
+  );
+
+  const handleConfirm = () => {
+    onConfirm(id);
+    onClose();
+  };
   return (
     <BottomSheet
       title="حذف آدرس"
@@ -17,7 +24,7 @@ const DeleteConfirmation: FC<DeleteConfirmationPropertiesTypes> = (
       isOpen={isOpen}
       actions={
         <div className="flex gap-[10px]">
-          <Button onClick={() => onConfirm(id)} fullWidth color="secondary">
+          <Button onClick={handleConfirm} fullWidth color="secondary">
             <span>تایید</span>
           </Button>
           <Button fullWidth variant="outlined" color="secondary">

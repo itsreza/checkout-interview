@@ -1,20 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { Radio } from "./radio";
+import { RadioGroupPropertiesTypes } from "./types";
 
-type RadioGroupProps = {
-  name: string;
-  options: { id: string; value: string; label: string }[];
-  selectedValue: string;
-  onChange: (value: string) => void;
-};
-
-export const RadioGroup = ({
-  name,
-  options = [],
-  selectedValue,
-  onChange,
-  onRemove,
-}: RadioGroupProps) => {
+export const RadioGroup: FC<RadioGroupPropertiesTypes> = (properties) => {
+  const { name, options = [], selectedValue, onChange, onRemove } = properties;
   return (
     <div className="flex flex-col gap-4">
       {options?.map((option) => (
@@ -27,7 +16,7 @@ export const RadioGroup = ({
           onChange={onChange}
           title={option.title}
           description={option?.description}
-          onRemove={() => onRemove(option.id)}
+          onRemove={() => onRemove?.(option.id)}
         />
       ))}
     </div>

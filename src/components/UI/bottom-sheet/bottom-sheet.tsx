@@ -15,7 +15,6 @@ const BottomSheet: FC<BottomSheetPropertiesTypes> = (properties) => {
         className={`absolute inset-0 bg-black bg-opacity-50 transition-opacity ${
           isOpen ? "opacity-100" : "opacity-0"
         }`}
-        onClick={onClose}
       />
       <div
         className={`relative w-full max-w-screen-sm bg-white shadow-lg transform transition-transform ${

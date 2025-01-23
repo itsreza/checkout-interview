@@ -1,10 +1,10 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 import { RetryBottomSheetPropertiesTypes } from "./types";
-import Link from "next/link";
 import { BottomSheet, Button } from "@/components/UI";
 
-const RetryBottomSheet: FC<RetryBottomSheetPropertiesTypes> = (properties) => {
+const Component: FC<RetryBottomSheetPropertiesTypes> = (properties) => {
   const { isOpen, onClose, onRetry, isLoading } = properties;
+
   return (
     <BottomSheet
       title="آدرس‌های من"
@@ -21,16 +21,15 @@ const RetryBottomSheet: FC<RetryBottomSheetPropertiesTypes> = (properties) => {
           >
             تلاش مجدد
           </Button>
-          <Link className="w-full" href="/">
-            <Button
-              disabled={isLoading}
-              fullWidth
-              variant="outlined"
-              color="secondary"
-            >
-              بازگشت
-            </Button>
-          </Link>
+          <Button
+            onClick={onClose}
+            disabled={isLoading}
+            fullWidth
+            variant="outlined"
+            color="secondary"
+          >
+            بازگشت
+          </Button>
         </div>
       }
     >
@@ -42,4 +41,4 @@ const RetryBottomSheet: FC<RetryBottomSheetPropertiesTypes> = (properties) => {
   );
 };
 
-export { RetryBottomSheet };
+export const RetryBottomSheet = memo(Component);

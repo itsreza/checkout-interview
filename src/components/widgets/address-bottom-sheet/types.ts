@@ -1,13 +1,13 @@
-type AddressTypes = {
+export type AddressTypes = {
   details: string;
   id: string;
-  title: string;
+  name: string;
 };
 export type AddressBottomSheetPropertiesTypes = {
   onClose: () => void;
   isOpen: boolean;
-  onConfirm: () => void;
-  onRemove: () => void;
+  onConfirm: (id: string) => void;
+  onRemove: (id: string) => void;
   addresses: Array<AddressTypes>;
-  selectedAddress: AddressTypes;
+  selectedAddress?: string;
 };

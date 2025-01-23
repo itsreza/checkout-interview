@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useOrderCompletion } from "./hook";
 import { useRouter, useSearchParams } from "next/navigation";
 import {
@@ -18,19 +18,21 @@ export default function Home() {
     errors,
     onSubmit,
     addresses,
-    isOpenError,
+    isOpenRetry,
     selectedAddress,
     onChangeAddress,
     onRemoveAddress,
     isLoadingSubmitOrder,
+    onCloseRetry,
   } = useOrderCompletion();
   const router = useRouter();
   const searchParams = useSearchParams();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [confrimation, setConfirmation] = useState(false);
+
   useEffect(() => {
     const queryParams = new URLSearchParams(window.location.search);
-    const isBottomSheetOpen = queryParams.get("bottomSheet") === "open";
+    const isBottomSheetOpen = queryParams.get("address") === "open";
     setIsOpen(isBottomSheetOpen);
   }, [searchParams]);
 
@@ -40,15 +42,20 @@ export default function Home() {
     setConfirmation(confirmation);
   }, [searchParams]);
 
-  const handleOpen = () => router.push(`?bottomSheet=open`, { shallow: true });
+  const handleOpen = useCallback(() => {
+    router.push(`?address=open`, { shallow: true });
+  }, [router]);
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     router.back();
-  };
+  }, [router]);
 
-  const handleRemove = (addressId) =>
-    router.push(`?remove=open&id=${addressId}`, { shallow: true });
-
+  const handleRemove = useCallback(
+    (addressId: string) => {
+      router.push(`?remove=open&id=${addressId}`, { shallow: true });
+    },
+    [router]
+  );
   return (
     <div>
       <Divider title="مشخصات بیمه نامه" />
@@ -63,7 +70,7 @@ export default function Home() {
       />
       <DeleteConfirmation
         isOpen={confrimation}
-        onClose={() => router.back()}
+        onClose={handleClose}
         onConfirm={onRemoveAddress}
         addresses={addresses}
       />
@@ -76,8 +83,8 @@ export default function Home() {
         onRemove={handleRemove}
       />
       <RetryBottomSheet
-        isOpen={true}
-        onClose={() => setIsOpen(false)}
+        isOpen={isOpenRetry}
+        onClose={onCloseRetry}
         onRetry={onSubmit}
         isLoading={isLoadingSubmitOrder}
       />

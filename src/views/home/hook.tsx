@@ -23,12 +23,11 @@ const useOrderCompletion = () => {
   const [errors, setErrors] = useState<OrderDetailErrorsTypes>(
     orderFormDefaultValue
   );
-
-  const [isOpenError, setIsOpenError] = useState(false);
+  const [isOpenRetry, setIsOpenRetry] = useState<boolean>(false);
 
   const { push } = useRouter();
 
-  const { data: addresses, isLoading, isError, refetch } = useGetAddresses();
+  const { data: addresses, isLoading, refetch } = useGetAddresses();
 
   useEffect(() => {
     if (addresses) {
@@ -46,7 +45,7 @@ const useOrderCompletion = () => {
         push(successOrderRoute);
       },
       () => {
-        setIsOpenError(true);
+        setIsOpenRetry(true);
       }
     );
 
@@ -65,9 +64,13 @@ const useOrderCompletion = () => {
     setOrderDetail((prevState) => ({ ...prevState, addressId }));
 
   const onSubmit = () => {
-    if (validate(orderDetail)) {
-      submitOrder(orderDetail);
-    }
+    // if (validate(orderDetail)) {
+    submitOrder(orderDetail);
+    // }
+  };
+
+  const onCloseRetry = () => {
+    setIsOpenRetry(false);
   };
 
   const onRemoveAddress = (addressId: string) => {
@@ -86,11 +89,11 @@ const useOrderCompletion = () => {
     addresses: addressList,
     onRemoveAddress,
     isLoadingAddresses: isLoading,
-    isErrorAddresses: isError,
-    isOpenError,
+    isOpenRetry,
     onChangeAddress,
     selectedAddress: getSelectedAddressById(orderDetail.addressId),
     isLoadingSubmitOrder,
+    onCloseRetry,
   };
 };
 

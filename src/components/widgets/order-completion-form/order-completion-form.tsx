@@ -1,5 +1,5 @@
 import { Button } from "@/components/UI";
-import React, { FC } from "react";
+import React, { FC, Fragment } from "react";
 import { OrderCompletionFormPropertiesTypes } from "./types";
 import { TextField } from "@/components/UI";
 
@@ -7,6 +7,7 @@ const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
   properties
 ) => {
   const { errors, onChange, selectedAddress, onSelectAddress } = properties;
+
   return (
     <div className="px-[18px] flex flex-col pt-6 gap-6">
       <div className="flex flex-col gap-3">
@@ -41,18 +42,19 @@ const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
             {selectedAddress?.details}
           </span>
         ) : (
-          <p
-            className={`text-black text-subtitle-2 font-normal ${
-              errors?.addressId ? "text-error" : ""
-            }`}
-          >
-            لطفا آدرسی را که می‌خواهید روی بیمه‌نامه درج شود, وارد کنید.
-          </p>
+          <Fragment>
+            <p
+              className={`text-black text-subtitle-2 font-normal ${
+                errors?.addressId ? "text-error" : ""
+              }`}
+            >
+              لطفا آدرسی را که می‌خواهید روی بیمه‌نامه درج شود, وارد کنید.
+            </p>
+            <Button onClick={onSelectAddress} fullWidth>
+              <span>انتخاب از آدرس‌های من</span>
+            </Button>
+          </Fragment>
         )}
-
-        <Button onClick={onSelectAddress} fullWidth>
-          <span>انتخاب از آدرس‌های من</span>
-        </Button>
       </div>
     </div>
   );

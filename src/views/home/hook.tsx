@@ -57,6 +57,7 @@ const useOrderCompletion = () => {
 
   const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e?.target;
+    setErrors((prevState) => ({ ...prevState, [name]: "" }));
     setOrderDetail((prevState) => ({ ...prevState, [name]: value }));
   };
 

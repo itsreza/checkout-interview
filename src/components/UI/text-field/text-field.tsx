@@ -13,7 +13,7 @@ const TextField: FC<TextFieldPropertiesTypes> = (properties) => {
   return (
     <div className="flex flex-col gap-1">
       <input
-        className={`border w-full outline-none p-3 border-grey-400 text-grey-700 ${
+        className={`border w-full outline-none p-3 border-grey-400 text-black placeholder:text-grey-700 ${
           error ? "border-error text-error placeholder:text-error" : ""
         }`}
         type={type}

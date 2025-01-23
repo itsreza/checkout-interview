@@ -67,11 +67,15 @@ export default function Home() {
           onChange={handleChange}
           selectedAddress={selectedAddress}
           onSelectAddress={handleOpen}
-          onSubmit={onSubmit}
         />
       </div>
       <div className="flex justify-end px-[18px] py-3">
-        <Button onClick={onSubmit} color="secondary">
+        <Button
+          disabled={isLoadingSubmitOrder}
+          loading={isLoadingSubmitOrder}
+          onClick={onSubmit}
+          color="secondary"
+        >
           <span>تایید و ادامه</span>
         </Button>
       </div>

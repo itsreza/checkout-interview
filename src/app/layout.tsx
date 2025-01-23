@@ -1,4 +1,5 @@
 "use client";
+import { Suspense } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
@@ -27,9 +28,11 @@ export default function RootLayout({
         <div
           className={`max-w-screen-sm mx-auto ${geistSans.variable} ${geistMono.variable} antialiased`}
         >
-          <QueryClientProvider client={queryClient}>
-            {children}
-          </QueryClientProvider>
+          <Suspense fallback={<div>Loading...</div>}>
+            <QueryClientProvider client={queryClient}>
+              {children}
+            </QueryClientProvider>
+          </Suspense>
         </div>
       </body>
     </html>

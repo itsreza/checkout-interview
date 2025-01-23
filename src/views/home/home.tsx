@@ -43,7 +43,7 @@ export default function Home() {
   }, [searchParams]);
 
   const handleOpen = useCallback(() => {
-    router.push(`?address=open`, { shallow: true });
+    router.push(`?address=open`, { scroll: false });
   }, [router]);
 
   const handleClose = useCallback(() => {
@@ -52,7 +52,7 @@ export default function Home() {
 
   const handleRemove = useCallback(
     (addressId: string) => {
-      router.push(`?remove=open&id=${addressId}`, { shallow: true });
+      router.push(`?remove=open&id=${addressId}`, { scroll: false });
     },
     [router]
   );

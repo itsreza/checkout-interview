@@ -1,15 +1,11 @@
 "use client";
 import Button from "@/components/UI/button/button";
 import { Divider } from "@/components/UI/divider/divider";
-import CarInformation from "@/components/widgets/car-information/card-information";
-import SuccessMessage from "@/components/widgets/success-message/success-message";
-import Image from "next/image";
+import { CarInformation, SuccessMessage } from "@/components/widgets";
 import Link from "next/link";
 import React from "react";
 
-type Props = {};
-
-export default function SuccessInsurancePage({}: Props) {
+export default function SuccessInsurancePage() {
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">

@@ -1,8 +1,8 @@
 import Rows from "@/components/UI/rows/rows";
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
 
-export default function CarInformation() {
+const CarInformation: FC = () => {
   return (
     <div className="max-w-[280px] mx-auto flex flex-col gap-6 pt-6 pb-8">
       <Image src="/car_plate.svg" width={280} height={50} alt="پلاک خودرو" />
@@ -13,4 +13,6 @@ export default function CarInformation() {
       </div>
     </div>
   );
-}
+};
+
+export { CarInformation };

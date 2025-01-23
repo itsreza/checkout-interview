@@ -1,6 +1,7 @@
 import React from "react";
 import styles from "./button.module.scss";
 import Image from "next/image";
+
 type ButtonPropertiesTypes = {
   color?: "primary" | "secondary";
   variant?: "contained" | "outlined";
@@ -8,6 +9,7 @@ type ButtonPropertiesTypes = {
   loading?: boolean;
   fullWidth?: boolean;
   children: React.ReactNode | string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export default function Button(properties: ButtonPropertiesTypes) {

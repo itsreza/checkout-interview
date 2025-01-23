@@ -1,18 +1,14 @@
 import { BottomSheetNew } from "@/components/UI/bottom-sheet/bottom-sheet-new";
 import Button from "@/components/UI/button/button";
 import { useSearchParams } from "next/navigation";
+import React, { FC } from "react";
+import { DeleteConfirmationPropertiesTypes } from "./types";
 
-import React from "react";
-
-type Props = {};
-
-export default function DeleteConfirmation({
-  isOpen,
-  onClose,
-  onConfirm,
-  addresses,
-}: Props) {
-  const searchParams = useSearchParams(); // Access the query parameters
+const DeleteConfirmation: FC<DeleteConfirmationPropertiesTypes> = (
+  properties
+) => {
+  const { isOpen, onClose, onConfirm, addresses } = properties;
+  const searchParams = useSearchParams();
   const id = searchParams.get("id");
   const selectedAddress = addresses.find((address) => address.id === id);
   return (
@@ -42,4 +38,5 @@ export default function DeleteConfirmation({
       </div>
     </BottomSheetNew>
   );
-}
+};
+export { DeleteConfirmation };

@@ -1,16 +1,13 @@
 import Button from "@/components/UI/button/button";
 import { TextField } from "@/components/UI/text-field/text-field";
-import React from "react";
+import React, { FC } from "react";
+import { OrderCompletionFormPropertiesTypes } from "./types";
 
-type Props = {};
-
-export default function OrderCompletionForm({
-  errors,
-  onChange,
-  selectedAddress,
-  onSelectAddress,
-  onSubmit,
-}: Props) {
+const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
+  properties
+) => {
+  const { errors, onChange, selectedAddress, onSelectAddress, onSubmit } =
+    properties;
   return (
     <div className="px-[18px] flex flex-col py-12 gap-12">
       <div className="flex flex-col gap-3">
@@ -65,4 +62,6 @@ export default function OrderCompletionForm({
       </div>
     </div>
   );
-}
+};
+
+export { OrderCompletionForm };

@@ -1,10 +1,11 @@
 import { BottomSheetNew } from "@/components/UI/bottom-sheet/bottom-sheet-new";
 import Button from "@/components/UI/button/button";
-import React from "react";
+import React, { FC } from "react";
+import { RetryBottomSheetPropertiesTypes } from "./types";
+import Link from "next/link";
 
-type Props = {};
-
-export default function RetryBottomSheet({ isOpen, onClose, onRetry }: Props) {
+const RetryBottomSheet: FC<RetryBottomSheetPropertiesTypes> = (properties) => {
+  const { isOpen, onClose, onRetry, isLoading } = properties;
   return (
     <BottomSheetNew
       title="آدرس‌های من"
@@ -13,22 +14,24 @@ export default function RetryBottomSheet({ isOpen, onClose, onRetry }: Props) {
       actions={
         <div className="flex gap-[10px]">
           <Button
-            disabled
-            loading={true}
+            disabled={isLoading}
+            loading={isLoading}
             onClick={onRetry}
             fullWidth
             color="secondary"
           >
-            <span>تلاش مجدد</span>
+            تلاش مجدد
           </Button>
-          <Button
-            disabled={true}
-            fullWidth
-            variant="outlined"
-            color="secondary"
-          >
-            <span>بازگشت</span>
-          </Button>
+          <Link className="w-full" href="/">
+            <Button
+              disabled={isLoading}
+              fullWidth
+              variant="outlined"
+              color="secondary"
+            >
+              بازگشت
+            </Button>
+          </Link>
         </div>
       }
     >
@@ -38,4 +41,6 @@ export default function RetryBottomSheet({ isOpen, onClose, onRetry }: Props) {
       </div>
     </BottomSheetNew>
   );
-}
+};
+
+export { RetryBottomSheet };

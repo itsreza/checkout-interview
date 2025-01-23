@@ -1,72 +1,56 @@
-// "use server";
-import { axiosInstance } from "@/utils/fetcher/axios";
-import {
-  validateAddressId,
-  validateNationalId,
-  validateOrderDetail,
-  validatePhoneNumber,
-} from "@/utils/validations/validations";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { validateOrderDetail } from "@/utils/validations/validations";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { useGetAddresses, useSubmitOrder } from "./queries";
+import {
+  AddressItemTypes,
+  OrderDetailErrorsTypes,
+  OrderDetailTypes,
+} from "./types";
+import { successOrderRoute } from "./constants";
+
+const orderFormDefaultValue = {
+  nationalId: "",
+  phoneNumber: "",
+  addressId: "",
+};
 
 const useOrderCompletion = () => {
-  const defaultValues = {
-    nationalId: "",
-    phoneNumber: "",
-    addressId: "",
-  };
+  const [addressList, setAddressList] = useState<Array<AddressItemTypes>>([]);
+  const [orderDetail, setOrderDetail] = useState<OrderDetailTypes>(
+    orderFormDefaultValue
+  );
+  const [errors, setErrors] = useState<OrderDetailErrorsTypes>(
+    orderFormDefaultValue
+  );
 
-  const [orderDetail, setOrderDetail] = useState<object>(defaultValues);
-  const [errors, setErrors] = useState(defaultValues);
   const [isOpenError, setIsOpenError] = useState(false);
-  const [localAddresses, setLocalAddresses] = useState([]);
+
   const { push } = useRouter();
 
   const { data: addresses, isLoading, isError, refetch } = useGetAddresses();
 
   useEffect(() => {
     if (addresses) {
-      setLocalAddresses(addresses); // Update local state when query data changes
+      setAddressList(addresses);
     }
   }, [addresses]);
 
-  //   const {
-  //     mutate: submitOrder,
-  //     isLoading: isSubmitting,
-  //     isError: isErrorSubmitting,
-  //   } = useMutation({
-  //     mutationFn: async (orderDetail) => {
-  //       const response = await axiosInstance.post(
-  //         "/order/completion/",
-  //         orderDetail
-  //       );
-  //       return response.data;
-  //     },
-  //     onSuccess: () => {
-  //       push("/success-insurance");
-  //     },
-  //     onError: (error) => {
-  //       setIsOpenError(true);
-  //     },
-  //   });
-
-  const { mutate: submitOrder, isPending } = useSubmitOrder(
-    () => {
-      push("/success-insurance");
-    },
-    () => {
-      setIsOpenError(true);
-    }
-  );
-
-  // Fetch addresses when the component mounts
   useEffect(() => {
     refetch();
   }, [refetch]);
 
-  const validate = (orderDetail) => {
+  const { mutate: submitOrder, isPending: isLoadingSubmitOrder } =
+    useSubmitOrder(
+      () => {
+        push(successOrderRoute);
+      },
+      () => {
+        setIsOpenError(true);
+      }
+    );
+
+  const validate = (orderDetail: OrderDetailTypes) => {
     const { validationErrors, isValid } = validateOrderDetail(orderDetail);
     setErrors(validationErrors);
     return isValid;
@@ -77,7 +61,7 @@ const useOrderCompletion = () => {
     setOrderDetail((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onChangeAddress = (addressId) =>
+  const onChangeAddress = (addressId: string) =>
     setOrderDetail((prevState) => ({ ...prevState, addressId }));
 
   const onSubmit = () => {
@@ -86,27 +70,27 @@ const useOrderCompletion = () => {
     }
   };
 
-  const onRemoveAddress = (addressId) => {
-    const removed = localAddresses.filter(
-      (address) => address.id !== addressId
-    );
-    setLocalAddresses(removed);
+  const onRemoveAddress = (addressId: string) => {
+    const removed = addressList.filter((address) => address.id !== addressId);
+    setAddressList(removed);
   };
+
+  const getSelectedAddressById = (addressId?: string) =>
+    addressList.find((address) => address.id === addressId);
 
   return {
     handleChange,
     onSubmit,
     orderDetail,
     errors,
-    addresses: localAddresses,
+    addresses: addressList,
     onRemoveAddress,
     isLoadingAddresses: isLoading,
     isErrorAddresses: isError,
     isOpenError,
     onChangeAddress,
-    selectedAddress: addresses?.find(
-      (item) => item?.id === orderDetail?.addressId
-    ),
+    selectedAddress: getSelectedAddressById(orderDetail.addressId),
+    isLoadingSubmitOrder,
   };
 };
 

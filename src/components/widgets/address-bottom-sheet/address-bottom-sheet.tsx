@@ -1,18 +1,14 @@
 import { BottomSheetNew } from "@/components/UI/bottom-sheet/bottom-sheet-new";
 import Button from "@/components/UI/button/button";
 import { RadioGroup } from "@/components/UI/radio/radio-group";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
+import { AddressBottomSheetPropertiesTypes } from "./types";
 
-type Props = {};
-
-export default function AddressBottomSheet({
-  onClose,
-  isOpen,
-  addresses,
-  selectedAddress,
-  onConfirm,
-  onRemove,
-}: Props) {
+const AddressBottomSheet: FC<AddressBottomSheetPropertiesTypes> = (
+  properties
+) => {
+  const { onClose, isOpen, addresses, selectedAddress, onConfirm, onRemove } =
+    properties;
   const [selected, setSelected] = useState(selectedAddress);
 
   useState(() => {
@@ -51,4 +47,6 @@ export default function AddressBottomSheet({
       />
     </BottomSheetNew>
   );
-}
+};
+
+export { AddressBottomSheet };

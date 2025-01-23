@@ -1,19 +1,15 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { BottomSheetNew } from "@/components/UI/bottom-sheet/bottom-sheet-new";
-import Button from "@/components/UI/button/button";
 import { Divider } from "@/components/UI/divider/divider";
-import { RadioGroup } from "@/components/UI/radio/radio-group";
-import Rows from "@/components/UI/rows/rows";
-import { TextField } from "@/components/UI/text-field/text-field";
-import Image from "next/image";
-import CarInformation from "@/components/widgets/car-information/card-information";
 import { useOrderCompletion } from "./hook";
 import { useRouter, useSearchParams } from "next/navigation";
-import AddressBottomSheet from "@/components/widgets/address-bottom-sheet/address-bottom-sheet";
-import RetryBottomSheet from "@/components/widgets/retry-bottom-sheet/retry-bottom-sheet";
-import OrderCompletionForm from "@/components/widgets/order-completion-form/order-completion-form";
 import DeleteConfirmation from "@/components/widgets/delete-confirmation/delete-confirmation";
+import {
+  AddressBottomSheet,
+  CarInformation,
+  OrderCompletionForm,
+  RetryBottomSheet,
+} from "@/components/widgets";
 
 type Props = {};
 
@@ -28,6 +24,7 @@ export default function Home({}: Props) {
     selectedAddress,
     onChangeAddress,
     onRemoveAddress,
+    isLoadingSubmitOrder,
   } = useOrderCompletion();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -81,9 +78,10 @@ export default function Home({}: Props) {
         onRemove={handleRemove}
       />
       <RetryBottomSheet
-        isOpen={false}
+        isOpen={true}
         onClose={() => setIsOpen(false)}
         onRetry={onSubmit}
+        isLoading={isLoadingSubmitOrder}
       />
     </div>
   );

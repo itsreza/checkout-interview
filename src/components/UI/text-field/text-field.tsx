@@ -23,7 +23,7 @@ const Component: FC<TextFieldPropertiesTypes> = (properties) => {
         name={name}
       />
       <span
-        className={`text-error font-normal text-subtitle-2 transition-opacity ${
+        className={`text-error font-normal text-subtitle-2 transition-opacity min-h-[22px] ${
           helperText ? "visible opacity-100" : "invisible opacity-0 h-[22px]"
         }`}
       >

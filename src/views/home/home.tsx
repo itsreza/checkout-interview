@@ -57,7 +57,7 @@ export default function Home() {
     [router]
   );
   return (
-    <div className="flex flex-col min-h-dvh">
+    <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
         <Divider title="مشخصات بیمه نامه" />
         <CarInformation />

@@ -1,11 +1,8 @@
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
+import { DividerPropertiesTypes } from "./types";
 
-type DividerPropertiesTypes = {
-  title: string;
-};
-
-function Divider(properties: DividerPropertiesTypes) {
+const Divider: FC<DividerPropertiesTypes> = (properties) => {
   const { title } = properties;
   return (
     <div className="flex gap-1.5 items-center shadow-test px-2 py-3">
@@ -15,6 +12,6 @@ function Divider(properties: DividerPropertiesTypes) {
       <h2 className="text-black text-headline-5 font-medium">{title}</h2>
     </div>
   );
-}
+};
 
 export { Divider };

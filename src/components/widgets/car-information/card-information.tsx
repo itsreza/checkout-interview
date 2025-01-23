@@ -1,4 +1,4 @@
-import Rows from "@/components/UI/rows/rows";
+import { Rows } from "@/components/UI";
 import Image from "next/image";
 import React, { FC } from "react";
 

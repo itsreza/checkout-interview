@@ -1,5 +1,4 @@
-import { BottomSheetNew } from "@/components/UI/bottom-sheet/bottom-sheet-new";
-import Button from "@/components/UI/button/button";
+import { Button, BottomSheet } from "@/components/UI";
 import { useSearchParams } from "next/navigation";
 import React, { FC } from "react";
 import { DeleteConfirmationPropertiesTypes } from "./types";
@@ -12,7 +11,7 @@ const DeleteConfirmation: FC<DeleteConfirmationPropertiesTypes> = (
   const id = searchParams.get("id");
   const selectedAddress = addresses.find((address) => address.id === id);
   return (
-    <BottomSheetNew
+    <BottomSheet
       title="حذف آدرس"
       onClose={onClose}
       isOpen={isOpen}
@@ -36,7 +35,7 @@ const DeleteConfirmation: FC<DeleteConfirmationPropertiesTypes> = (
           {selectedAddress?.details}
         </span>
       </div>
-    </BottomSheetNew>
+    </BottomSheet>
   );
 };
 export { DeleteConfirmation };

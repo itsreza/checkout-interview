@@ -1,18 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import styles from "./button.module.scss";
 import Image from "next/image";
+import { ButtonPropertiesTypes } from "./types";
 
-type ButtonPropertiesTypes = {
-  color?: "primary" | "secondary";
-  variant?: "contained" | "outlined";
-  disabled?: boolean;
-  loading?: boolean;
-  fullWidth?: boolean;
-  children: React.ReactNode | string;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
-};
-
-export default function Button(properties: ButtonPropertiesTypes) {
+const Button: FC<ButtonPropertiesTypes> = (properties) => {
   const {
     color = "primary",
     variant = "contained",
@@ -45,4 +36,6 @@ export default function Button(properties: ButtonPropertiesTypes) {
       </div>
     </button>
   );
-}
+};
+
+export { Button };

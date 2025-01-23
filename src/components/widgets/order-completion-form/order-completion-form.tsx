@@ -1,7 +1,8 @@
-import Button from "@/components/UI/button/button";
-import { TextField } from "@/components/UI/text-field/text-field";
+import { Button } from "@/components/UI";
+
 import React, { FC } from "react";
 import { OrderCompletionFormPropertiesTypes } from "./types";
+import { TextField } from "@/components/UI";
 
 const OrderCompletionForm: FC<OrderCompletionFormPropertiesTypes> = (
   properties

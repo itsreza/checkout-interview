@@ -1,11 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
+import { TextFieldPropertiesTypes } from "./types";
 
-type TextFieldPropertiesTypes = {
-  type: "text" | "tel";
-  placeholder: string;
-};
-
-function TextField(properties: TextFieldPropertiesTypes) {
+const TextField: FC<TextFieldPropertiesTypes> = (properties) => {
   const {
     type = "text",
     placeholder,
@@ -33,6 +29,6 @@ function TextField(properties: TextFieldPropertiesTypes) {
       )}
     </div>
   );
-}
+};
 
 export { TextField };

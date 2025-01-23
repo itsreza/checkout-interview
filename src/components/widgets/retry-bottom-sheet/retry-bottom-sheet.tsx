@@ -1,13 +1,12 @@
-import { BottomSheetNew } from "@/components/UI/bottom-sheet/bottom-sheet-new";
-import Button from "@/components/UI/button/button";
 import React, { FC } from "react";
 import { RetryBottomSheetPropertiesTypes } from "./types";
 import Link from "next/link";
+import { BottomSheet, Button } from "@/components/UI";
 
 const RetryBottomSheet: FC<RetryBottomSheetPropertiesTypes> = (properties) => {
   const { isOpen, onClose, onRetry, isLoading } = properties;
   return (
-    <BottomSheetNew
+    <BottomSheet
       title="آدرس‌های من"
       onClose={onClose}
       isOpen={isOpen}
@@ -39,7 +38,7 @@ const RetryBottomSheet: FC<RetryBottomSheetPropertiesTypes> = (properties) => {
         <span>متاسفانه در ثبت اطلاعات شما، خطایی رخ داده است.</span>
         <span>مجددا، تلاش کنید.</span>
       </div>
-    </BottomSheetNew>
+    </BottomSheet>
   );
 };
 

@@ -1,25 +1,10 @@
 import Image from "next/image";
-import React from "react";
+import React, { FC } from "react";
+import { RadioPropertiesTypes } from "./types";
 
-type RadioProps = {
-  id: string;
-  name: string;
-  value: string;
-  checked: boolean;
-  onChange: (value: string) => void;
-  label: string;
-};
-
-export const Radio = ({
-  id,
-  name,
-  value,
-  checked,
-  onChange,
-  title,
-  description,
-  onRemove,
-}: RadioProps) => {
+export const Radio: FC<RadioPropertiesTypes> = (properties) => {
+  const { id, name, value, checked, onChange, title, description, onRemove } =
+    properties;
   return (
     <div className="flex items-start gap-2 w-full">
       <div className="h-[22px] flex justify-center items-center">

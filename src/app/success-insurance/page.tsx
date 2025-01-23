@@ -1,6 +1,6 @@
 "use client";
-import Button from "@/components/UI/button/button";
-import { Divider } from "@/components/UI/divider/divider";
+import { Divider } from "@/components/UI";
+import { Button } from "@/components/UI";
 import { CarInformation, SuccessMessage } from "@/components/widgets";
 import Link from "next/link";
 import React from "react";

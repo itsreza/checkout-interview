@@ -1,19 +1,17 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Divider } from "@/components/UI/divider/divider";
 import { useOrderCompletion } from "./hook";
 import { useRouter, useSearchParams } from "next/navigation";
-import DeleteConfirmation from "@/components/widgets/delete-confirmation/delete-confirmation";
 import {
   AddressBottomSheet,
   CarInformation,
+  DeleteConfirmation,
   OrderCompletionForm,
   RetryBottomSheet,
 } from "@/components/widgets";
+import { Divider } from "@/components/UI";
 
-type Props = {};
-
-export default function Home({}: Props) {
+export default function Home() {
   const {
     handleChange,
     orderDetail,

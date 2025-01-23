@@ -1,5 +1,4 @@
-import { BottomSheetNew } from "@/components/UI/bottom-sheet/bottom-sheet-new";
-import Button from "@/components/UI/button/button";
+import { BottomSheet, Button } from "@/components/UI";
 import { RadioGroup } from "@/components/UI/radio/radio-group";
 import React, { FC, useState } from "react";
 import { AddressBottomSheetPropertiesTypes } from "./types";
@@ -23,7 +22,7 @@ const AddressBottomSheet: FC<AddressBottomSheetPropertiesTypes> = (
   };
 
   return (
-    <BottomSheetNew
+    <BottomSheet
       title="آدرس‌های من"
       onClose={onClose}
       isOpen={isOpen}
@@ -45,7 +44,7 @@ const AddressBottomSheet: FC<AddressBottomSheetPropertiesTypes> = (
         onChange={handleChange}
         onRemove={onRemove}
       />
-    </BottomSheetNew>
+    </BottomSheet>
   );
 };
 

@@ -1,8 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
+import { RowsPropertiesTypes } from "./types";
 
-type RowsPropertiesTypes = { title: string; value: string };
-
-export default function Rows(properties: RowsPropertiesTypes) {
+const Rows: FC<RowsPropertiesTypes> = (properties) => {
   const { title, value } = properties;
   return (
     <div className="flex items-center justify-between font-normal text-subtitle-2">
@@ -11,4 +10,6 @@ export default function Rows(properties: RowsPropertiesTypes) {
       <span className="flex-none text-black">{value}</span>
     </div>
   );
-}
+};
+
+export { Rows };

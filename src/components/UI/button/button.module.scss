@@ -1,0 +1,34 @@
+.button {
+  @apply w-[140px] h-[49px] font-semi-bold text-black text-button flex justify-center items-center;
+  &.fullWidth {
+    @apply w-full;
+  }
+  &.contained {
+    &.primary {
+      @apply bg-primary;
+    }
+    &.secondary {
+      @apply bg-secondary text-white;
+    }
+    &.disabled {
+      @apply bg-disable text-disable-dark;
+    }
+    &.loading {
+    }
+  }
+
+  &.outlined {
+    @apply border bg-white;
+    &.primary {
+      @apply border-primary;
+    }
+    &.secondary {
+      @apply border-secondary;
+    }
+    &.disabled {
+      @apply bg-disable text-disable-dark border-none;
+    }
+    &.loading {
+    }
+  }
+}

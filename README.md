@@ -31,7 +31,4 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 Or npm run build ....
 npm run start
 
-Live Code Deployed On Vercel
-https://checkout-interview.vercel.app/
-
 happy hacking...

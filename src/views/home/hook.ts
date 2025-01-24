@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { OrderDetailTypes } from "./types";
-import { useAddresses, useOrderSubmission, useValidation } from "./hooks";
+import { useOrderSubmission, useValidation } from "./hooks";
+import { useRouter } from "next/navigation";
 
 const orderFormDefaultValue = {
   nationalId: "",
@@ -9,20 +10,13 @@ const orderFormDefaultValue = {
 };
 
 const useOrderCompletion = () => {
+  const router = useRouter();
   const [orderDetail, setOrderDetail] = useState<OrderDetailTypes>(
     orderFormDefaultValue
   );
-  const [isOpenRetry, setIsOpenRetry] = useState<boolean>(false);
-  const {
-    addressList,
-    isLoading: isLoadingAddresses,
-    removeAddress,
-    getSelectedAddressById,
-  } = useAddresses();
-  const { errors, validate, setErrors } = useValidation();
-  const { submitOrder, isLoadingSubmitOrder } = useOrderSubmission(() =>
-    setIsOpenRetry(true)
-  );
+
+  const { validate, setErrors } = useValidation();
+  const { submitOrder, isLoadingSubmitOrder } = useOrderSubmission();
 
   const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e?.target;
@@ -39,23 +33,23 @@ const useOrderCompletion = () => {
     }
   };
 
-  const onCloseRetry = () => {
-    setIsOpenRetry(false);
-  };
+  const onOpenBottomSheet = useCallback(
+    (query: string) => router.push(query, { scroll: false }),
+    [router]
+  );
+
+  const onCloseBottomSheet = useCallback(() => {
+    router.back();
+  }, [router]);
 
   return {
     handleChange,
     onSubmit,
     orderDetail,
-    errors,
-    addresses: addressList,
-    onRemoveAddress: removeAddress,
-    isLoadingAddresses,
-    isOpenRetry,
     onChangeAddress,
-    selectedAddress: getSelectedAddressById(orderDetail.addressId),
     isLoadingSubmitOrder,
-    onCloseRetry,
+    onCloseBottomSheet,
+    onOpenBottomSheet,
   };
 };
 

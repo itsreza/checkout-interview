@@ -6,6 +6,7 @@ const fetchAddresses = async () => {
   const response = await axiosInstance.get("/my-addresses/", {
     withCredentials: true,
   });
+  console.log("FETCH ADDRESS");
   return response.data;
 };
 

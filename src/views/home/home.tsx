@@ -1,7 +1,7 @@
 "use client";
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import { useOrderCompletion } from "./hook";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import {
   AddressBottomSheet,
   CarInformation,
@@ -10,52 +10,27 @@ import {
   RetryBottomSheet,
 } from "@/components/widgets";
 import { Button, Divider } from "@/components/UI";
+import { useAddresses, useValidation } from "./hooks";
 
 export default function Home() {
   const {
     handleChange,
     orderDetail,
-    errors,
     onSubmit,
-    addresses,
-    isOpenRetry,
-    selectedAddress,
     onChangeAddress,
-    onRemoveAddress,
     isLoadingSubmitOrder,
-    onCloseRetry,
+    onCloseBottomSheet,
+    onOpenBottomSheet,
   } = useOrderCompletion();
-  const router = useRouter();
+  const { errors } = useValidation();
+  const {
+    addressList: addresses,
+    getSelectedAddressById,
+    removeAddress: onRemoveAddress,
+  } = useAddresses();
   const searchParams = useSearchParams();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [confrimation, setConfirmation] = useState(false);
+  const selectedAddress = getSelectedAddressById();
 
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const isBottomSheetOpen = queryParams.get("address") === "open";
-    setIsOpen(isBottomSheetOpen);
-  }, [searchParams]);
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const confirmation = queryParams.get("remove") === "open";
-    setConfirmation(confirmation);
-  }, [searchParams]);
-
-  const handleOpen = useCallback(() => {
-    router.push(`?address=open`, { scroll: false });
-  }, [router]);
-
-  const handleClose = useCallback(() => {
-    router.back();
-  }, [router]);
-
-  const handleRemove = useCallback(
-    (addressId: string) => {
-      router.push(`?remove=open&id=${addressId}`, { scroll: false });
-    },
-    [router]
-  );
   return (
     <div className="flex flex-col min-h-screen">
       <div className="flex-grow">
@@ -66,7 +41,7 @@ export default function Home() {
           errors={errors}
           onChange={handleChange}
           selectedAddress={selectedAddress}
-          onSelectAddress={handleOpen}
+          onSelectAddress={() => onOpenBottomSheet("?address=open")}
         />
       </div>
       <div className="flex justify-end px-[18px] py-3">
@@ -80,22 +55,24 @@ export default function Home() {
         </Button>
       </div>
       <DeleteConfirmation
-        isOpen={confrimation}
-        onClose={handleClose}
+        isOpen={searchParams.get("remove") === "open"}
+        onClose={onCloseBottomSheet}
         onConfirm={onRemoveAddress}
         addresses={addresses}
       />
       <AddressBottomSheet
-        onClose={handleClose}
-        isOpen={isOpen}
+        onClose={onCloseBottomSheet}
+        isOpen={searchParams.get("address") === "open"}
         addresses={addresses}
         selectedAddress={orderDetail?.addressId}
         onConfirm={onChangeAddress}
-        onRemove={handleRemove}
+        onRemove={(addressId) =>
+          onOpenBottomSheet(`?remove=open&id=${addressId}`)
+        }
       />
       <RetryBottomSheet
-        isOpen={isOpenRetry}
-        onClose={onCloseRetry}
+        isOpen={searchParams.get("retry") === "open"}
+        onClose={onCloseBottomSheet}
         onRetry={onSubmit}
         isLoading={isLoadingSubmitOrder}
       />

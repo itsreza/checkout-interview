@@ -9,13 +9,12 @@ const orderFormDefaultValue = {
   addressId: "",
 };
 
-const useOrderCompletion = () => {
+const useOrderInsurance = () => {
   const router = useRouter();
   const [orderDetail, setOrderDetail] = useState<OrderDetailTypes>(
     orderFormDefaultValue
   );
-
-  const { validate, setErrors } = useValidation();
+  const { validate, setErrors, errors } = useValidation();
   const { submitOrder, isLoadingSubmitOrder } = useOrderSubmission();
 
   const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
@@ -24,14 +23,17 @@ const useOrderCompletion = () => {
     setOrderDetail((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const onChangeAddress = (addressId: string) =>
-    setOrderDetail((prevState) => ({ ...prevState, addressId }));
+  const onChangeAddress = useCallback(
+    (addressId: string) =>
+      setOrderDetail((prevState) => ({ ...prevState, addressId })),
+    []
+  );
 
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     if (validate(orderDetail)) {
       submitOrder(orderDetail);
     }
-  };
+  }, [orderDetail]);
 
   const onOpenBottomSheet = useCallback(
     (query: string) => router.push(query, { scroll: false }),
@@ -43,7 +45,10 @@ const useOrderCompletion = () => {
   }, [router]);
 
   return {
-    handleChange,
+    formProperties: {
+      errors,
+      onChange: handleChange,
+    },
     onSubmit,
     orderDetail,
     onChangeAddress,
@@ -53,4 +58,4 @@ const useOrderCompletion = () => {
   };
 };
 
-export { useOrderCompletion };
+export { useOrderInsurance };

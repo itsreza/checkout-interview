@@ -26,7 +26,12 @@ const Component: FC<DeleteConfirmationPropertiesTypes> = (properties) => {
           <Button onClick={handleConfirm} fullWidth color="secondary">
             <span>تایید</span>
           </Button>
-          <Button fullWidth variant="outlined" color="secondary">
+          <Button
+            onClick={onClose}
+            fullWidth
+            variant="outlined"
+            color="secondary"
+          >
             <span>بازگشت</span>
           </Button>
         </div>

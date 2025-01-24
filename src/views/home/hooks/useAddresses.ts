@@ -16,7 +16,7 @@ const useAddresses = () => {
     refetch();
   }, [refetch]);
 
-  const removeAddress = (addressId: string) => {
+  const onRemoveAddress = (addressId: string) => {
     const removed = addressList.filter((address) => address.id !== addressId);
     setAddressList(removed);
   };
@@ -24,7 +24,7 @@ const useAddresses = () => {
   const getSelectedAddressById = (addressId?: string) =>
     addressList.find((address) => address.id === addressId);
 
-  return { addressList, isLoading, removeAddress, getSelectedAddressById };
+  return { addressList, isLoading, onRemoveAddress, getSelectedAddressById };
 };
 
 export { useAddresses };

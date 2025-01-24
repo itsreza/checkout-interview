@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useOrderCompletion } from "./hook";
+import { useOrderInsurance } from "./hook";
 import { useSearchParams } from "next/navigation";
 import {
   AddressBottomSheet,
@@ -10,26 +10,27 @@ import {
   RetryBottomSheet,
 } from "@/components/widgets";
 import { Button, Divider } from "@/components/UI";
-import { useAddresses, useValidation } from "./hooks";
+import { useAddresses } from "./hooks";
 
 export default function Home() {
   const {
-    handleChange,
     orderDetail,
+    isLoadingSubmitOrder,
+    formProperties,
     onSubmit,
     onChangeAddress,
-    isLoadingSubmitOrder,
     onCloseBottomSheet,
     onOpenBottomSheet,
-  } = useOrderCompletion();
-  const { errors } = useValidation();
-  const {
-    addressList: addresses,
-    getSelectedAddressById,
-    removeAddress: onRemoveAddress,
-  } = useAddresses();
+  } = useOrderInsurance();
+  const { addressList, getSelectedAddressById, onRemoveAddress } =
+    useAddresses();
   const searchParams = useSearchParams();
-  const selectedAddress = getSelectedAddressById();
+
+  // TODO - Open Bottom Sheet can be change more stateless , but for more control still from prop handled.
+  // bottom sheets
+  const isOpenRetryBottomSheet = searchParams.get("retry") === "open";
+  const isOpenAddressBottomSheet = searchParams.get("address") === "open";
+  const isOpenDeleteAddressBottomSheet = searchParams.get("remove") === "open";
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -38,9 +39,8 @@ export default function Home() {
         <CarInformation />
         <Divider title="مشخصات مالک خودرو" />
         <OrderCompletionForm
-          errors={errors}
-          onChange={handleChange}
-          selectedAddress={selectedAddress}
+          {...formProperties}
+          selectedAddress={getSelectedAddressById(orderDetail?.addressId)}
           onSelectAddress={() => onOpenBottomSheet("?address=open")}
         />
       </div>
@@ -55,15 +55,15 @@ export default function Home() {
         </Button>
       </div>
       <DeleteConfirmation
-        isOpen={searchParams.get("remove") === "open"}
+        isOpen={isOpenDeleteAddressBottomSheet}
         onClose={onCloseBottomSheet}
         onConfirm={onRemoveAddress}
-        addresses={addresses}
+        addresses={addressList}
       />
       <AddressBottomSheet
         onClose={onCloseBottomSheet}
-        isOpen={searchParams.get("address") === "open"}
-        addresses={addresses}
+        isOpen={isOpenAddressBottomSheet}
+        addresses={addressList}
         selectedAddress={orderDetail?.addressId}
         onConfirm={onChangeAddress}
         onRemove={(addressId) =>
@@ -71,7 +71,7 @@ export default function Home() {
         }
       />
       <RetryBottomSheet
-        isOpen={searchParams.get("retry") === "open"}
+        isOpen={isOpenRetryBottomSheet}
         onClose={onCloseBottomSheet}
         onRetry={onSubmit}
         isLoading={isLoadingSubmitOrder}

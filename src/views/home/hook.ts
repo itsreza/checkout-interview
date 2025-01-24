@@ -17,6 +17,12 @@ const useOrderInsurance = () => {
   const { validate, setErrors, errors } = useValidation();
   const { submitOrder, isLoadingSubmitOrder } = useOrderSubmission();
 
+  const isDisabledSubmit =
+    !orderDetail?.phoneNumber ||
+    !orderDetail?.nationalId ||
+    !orderDetail?.addressId ||
+    isLoadingSubmitOrder;
+
   const handleChange = (e: React.FocusEvent<HTMLInputElement>) => {
     const { name, value } = e?.target;
     setErrors((prevState) => ({ ...prevState, [name]: "" }));
@@ -55,6 +61,7 @@ const useOrderInsurance = () => {
     isLoadingSubmitOrder,
     onCloseBottomSheet,
     onOpenBottomSheet,
+    isDisabledSubmit,
   };
 };
 

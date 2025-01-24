@@ -21,6 +21,7 @@ export default function Home() {
     onChangeAddress,
     onCloseBottomSheet,
     onOpenBottomSheet,
+    isDisabledSubmit,
   } = useOrderInsurance();
   const { addressList, getSelectedAddressById, onRemoveAddress } =
     useAddresses();
@@ -46,7 +47,7 @@ export default function Home() {
       </div>
       <div className="flex justify-end px-[18px] py-3">
         <Button
-          disabled={isLoadingSubmitOrder}
+          disabled={isDisabledSubmit}
           loading={isLoadingSubmitOrder}
           onClick={onSubmit}
           color="secondary"

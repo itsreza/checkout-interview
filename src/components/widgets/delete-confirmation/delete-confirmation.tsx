@@ -1,3 +1,4 @@
+"use client";
 import { Button, BottomSheet } from "@/components/UI";
 import { useSearchParams } from "next/navigation";
 import React, { FC, memo } from "react";

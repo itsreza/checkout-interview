@@ -1,9 +1,7 @@
-"use client";
 import { Divider } from "@/components/UI";
 import { Button } from "@/components/UI";
 import { CarInformation, SuccessMessage } from "@/components/widgets";
 import Link from "next/link";
-import React from "react";
 
 export default function SuccessInsurancePage() {
   return (
@@ -13,13 +11,11 @@ export default function SuccessInsurancePage() {
         <SuccessMessage />
         <CarInformation />
       </div>
-      <div className="flex justify-end pb-3 px-[10px]">
-        <Link href="/">
-          <Button color="secondary">
-            <span>بازگشت</span>
-          </Button>
-        </Link>
-      </div>
+      <Link className="flex justify-end pb-3 px-[10px]" href="/">
+        <Button color="secondary">
+          <span>بازگشت</span>
+        </Button>
+      </Link>
     </div>
   );
 }

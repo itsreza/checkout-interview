@@ -8,7 +8,7 @@ export default {
   ],
   theme: {
     fontFamily: {
-      custom: ["Vazirmatn", "sans-serif"], // Define font stack
+      custom: ["Vazirmatn", "sans-serif"],
     },
     extend: {
       colors: {
@@ -29,8 +29,7 @@ export default {
         success: "var(--color-success)",
       },
       boxShadow: {
-        light: "var(--shadow-light)",
-        test: "var(--shadow-test)",
+        "on-surfaces": "var(--shadow-on-surfaces)",
       },
       fontSize: {
         "headline-5": [

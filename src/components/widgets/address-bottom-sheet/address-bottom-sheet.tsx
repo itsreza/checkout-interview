@@ -1,3 +1,4 @@
+"use client";
 import { BottomSheet, Button } from "@/components/UI";
 import { RadioGroup } from "@/components/UI/radio/radio-group";
 import React, { FC, memo, useEffect, useState } from "react";

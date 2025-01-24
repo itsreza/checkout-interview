@@ -9,5 +9,4 @@ export type AddressBottomSheetPropertiesTypes = {
   onConfirm: (id: string) => void;
   onRemove: (id: string) => void;
   addresses: Array<AddressTypes>;
-  selectedAddress?: string;
 };

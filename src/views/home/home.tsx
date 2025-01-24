@@ -64,7 +64,6 @@ export default function Home() {
         onClose={onCloseBottomSheet}
         isOpen={isOpenAddressBottomSheet}
         addresses={addressList}
-        selectedAddress={orderDetail?.addressId}
         onConfirm={onChangeAddress}
         onRemove={(addressId) =>
           onOpenBottomSheet(`?remove=open&id=${addressId}`)

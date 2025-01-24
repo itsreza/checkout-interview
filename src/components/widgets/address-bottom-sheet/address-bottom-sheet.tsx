@@ -5,14 +5,11 @@ import React, { FC, memo, useEffect, useState } from "react";
 import { AddressBottomSheetPropertiesTypes, AddressTypes } from "./types";
 
 const Component: FC<AddressBottomSheetPropertiesTypes> = (properties) => {
-  const { onClose, isOpen, addresses, selectedAddress, onConfirm, onRemove } =
-    properties;
-  const [selected, setSelected] = useState<string | undefined>(selectedAddress);
+  const { onClose, isOpen, addresses, onConfirm, onRemove } = properties;
+  const [selected, setSelected] = useState<string | undefined>(undefined);
 
   useEffect(() => {
-    if (selectedAddress) {
-      setSelected(selectedAddress);
-    }
+    setSelected(undefined);
   }, [isOpen]);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) =>
